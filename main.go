@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"github.com/aetoledano/go2docker/constants"
 	app "github.com/aetoledano/go2docker/go2docker"
 	"os"
@@ -33,6 +32,4 @@ func main() {
 	if err != nil {
 		panic(err.Error())
 	}
-
-	fmt.Println("success !!!")
 }
