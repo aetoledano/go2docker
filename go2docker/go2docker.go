@@ -25,22 +25,16 @@ func Dockerizeit() error {
 	rawGo2dockerConfig, err := ioutil.ReadFile(constants.GO2DOCKER_FILE)
 	if err != nil {
 		fmt.Println("Warn: " + constants.NOT_VALID_GO2DOCKER_FILE + " " + err.Error())
-
-		config.Go.Version = constants.LATEST_GO_IMAGE_VERSION
-
-		dir, _ := os.Getwd()
-		info, _ := os.Stat(dir)
-		config.App.Name = info.Name()
 	} else {
 		err = yaml.Unmarshal(rawGo2dockerConfig, &config)
 		if err != nil {
 			return err
 		}
+	}
 
-		err = config.Validate()
-		if err != nil {
-			return err
-		}
+	err = config.Validate()
+	if err != nil {
+		return err
 	}
 
 	dockerfile := createDockerFile(&config)

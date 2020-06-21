@@ -10,6 +10,8 @@ const NOT_VALID_GO2DOCKER_FILE = "Not valid go2docker.yml file "
 /*
  app constants
 */
+const IMAGE_NAME_REGEX = `[a-z0-9]+(?:[._-]{1,2}[a-z0-9]+)*`
+
 const GO2DOCKER_FILE = "go2docker.yml"
 const CTX_SUFFIX = ".dkrctx"
 const DOCKERFILE = "Dockerfile"
