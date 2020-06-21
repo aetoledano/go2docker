@@ -33,7 +33,7 @@ include-external-resources:
  `include-external-resources` is an array of files that should be included in the final image aside the main executable
  
  ## Troubleshooting
- There has been some issues between the docker sdk used and the docker instance running go2docker with a fix docker version is a workaround:
+ There has been some issues between the docker sdk used and the docker instance running go2docker with a fix docker api version is a workaround:
  
  `DOCKER_API_VERSION=1.40 go2docker /path/to/awesome/project`
  
