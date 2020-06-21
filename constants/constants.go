@@ -13,6 +13,7 @@ const NOT_VALID_GO2DOCKER_FILE = "Not valid go2docker.yml file "
 const GO2DOCKER_FILE = "go2docker.yml"
 const CTX_SUFFIX = ".dkrctx"
 const DOCKERFILE = "Dockerfile"
+const LATEST_GO_IMAGE_VERSION = "latest"
 
 const IMAGE_VERSION = "__IMAGE_VERSION__"
 const APP_NAME = "__APP_NAME__"
