@@ -102,6 +102,16 @@ func buildDockerImage(buildCtx *os.File, config *models.DkrConfig) error {
 func createDockerFile(config *models.DkrConfig) string {
 	str := constants.DOCKERFILE_TEMPLATE
 
+	if len(config.IncludeExternalResources) != 0 {
+		sources := ""
+		for _, name := range config.IncludeExternalResources {
+			sources += `COPY --from=builder /go/src/__APP_NAME__/` + name + ` /app/` + name + "\n"
+		}
+		str = strings.ReplaceAll(str, constants.EXTERNAL_RESOURCES, sources)
+	} else {
+		str = strings.ReplaceAll(str, constants.EXTERNAL_RESOURCES, "")
+	}
+
 	str = strings.ReplaceAll(str, constants.IMAGE_VERSION, config.Go.Version)
 	str = strings.ReplaceAll(str, constants.APP_NAME, config.App.Name)
 	str = strings.ReplaceAll(str, constants.EXEC_NAME, uuid.New().String())

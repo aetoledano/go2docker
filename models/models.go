@@ -14,6 +14,7 @@ type DkrConfig struct {
 	Go struct {
 		Version string
 	}
+	IncludeExternalResources []string `yaml:"include-external-resources"`
 }
 
 func (config *DkrConfig) Validate() error {
@@ -28,6 +29,17 @@ func (config *DkrConfig) Validate() error {
 
 	if len(config.Go.Version) == 0 {
 		config.Go.Version = defaultGoVersion()
+	}
+
+	if len(config.IncludeExternalResources) != 0 {
+		dir, _ := os.Getwd()
+		dir += string(os.PathSeparator)
+		for _, name := range config.IncludeExternalResources {
+			_, e := os.Stat(dir + name)
+			if e != nil {
+				return errors.New("Could not access external resource " + e.Error())
+			}
+		}
 	}
 
 	return nil

@@ -20,6 +20,7 @@ const LATEST_GO_IMAGE_VERSION = "latest"
 const IMAGE_VERSION = "__IMAGE_VERSION__"
 const APP_NAME = "__APP_NAME__"
 const EXEC_NAME = "__EXEC_NAME__"
+const EXTERNAL_RESOURCES = "__EXTERNAL_FILES_INCLUDE_PLACEHOLDER__"
 
 const DOCKERFILE_TEMPLATE = `
 FROM golang:__IMAGE_VERSION__ AS builder
@@ -33,5 +34,6 @@ RUN env CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -o __EXEC_NAME__
 FROM alpine:latest
 WORKDIR /app
 COPY --from=builder /go/src/__APP_NAME__/__EXEC_NAME__ /app/__EXEC_NAME__
+__EXTERNAL_FILES_INCLUDE_PLACEHOLDER__
 CMD ["/app/__EXEC_NAME__"]
 `
