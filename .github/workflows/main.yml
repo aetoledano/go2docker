@@ -24,13 +24,14 @@ jobs:
     - name: Build go2docker executable
       run: |
         go get ./...
-        CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -o go2docker
+        CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -o go2docker-linux
 
     - uses: "marvinpinto/action-automatic-releases@latest"
       with:
         repo_token: "${{ secrets.GITHUB_TOKEN }}"
         automatic_release_tag: "latest"
         title: "Release Build"
+        prerelease: false
         files: |
-          go2docker
+          go2docker-linux
         
